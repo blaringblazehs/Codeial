@@ -10,7 +10,18 @@ const passport = require("passport");
 const passportLocal = require("./config/passport-local-strategy");
 // const MongoStore = require("connect-mongo")(session);
 var MongoDBStore = require("connect-mongodb-session")(session);
-// const mongoStore = require("connect-mongo")(session);
+const sassMiddleware = require("node-sass-middleware");
+
+app.use(
+    sassMiddleware({
+        src: "./assets/scss",
+        dest: "./assets/css",
+        debug: true,
+        outputStyle: "expanded",
+        prefix: "/css",
+    })
+);
+
 var store = new MongoDBStore({
     uri: "mongodb://localhost/codeial_development",
     databaseName: "codeial_development",
